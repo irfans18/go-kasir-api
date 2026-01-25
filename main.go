@@ -57,7 +57,7 @@ func getProdukByID(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Produk belum ada", http.StatusNotFound)
 }
 
-// PUT localhost:8887/api/produk/{id}
+// PUT localhost:8080/api/produk/{id}
 func updateProduk(w http.ResponseWriter, r *http.Request) {
 	// get id dari request
 	idStr := strings.TrimPrefix(r.URL.Path, "/api/produk/")
@@ -229,13 +229,13 @@ func deleteCategory(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Category belum ada", http.StatusNotFound)
 }
 
-// GET localhost:8887/api/produk
+// GET localhost:8080/api/produk
 func getAllProduk(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(produk)
 }
 
-// POST localhost:8887/api/produk
+// POST localhost:8080/api/produk
 func createProduk(w http.ResponseWriter, r *http.Request) {
 	// baca data dari request
 	var produkBaru Produk
@@ -256,12 +256,12 @@ func createProduk(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// Server Config
-	PORT := "8887"
+	PORT := "8080"
 	HOST := "localhost"
 
-	// GET localhost:8887/api/produk/{id}
-	// PUT localhost:8887/api/produk/{id}
-	// DELETE localhost:8887/api/produk/{id}
+	// GET localhost:8080/api/produk/{id}
+	// PUT localhost:8080/api/produk/{id}
+	// DELETE localhost:8080/api/produk/{id}
 	http.HandleFunc("/api/produk/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			getProdukByID(w, r)
@@ -272,8 +272,8 @@ func main() {
 		}
 	})
 
-	// GET localhost:8887/api/produk
-	// POST localhost:8887/api/produk
+	// GET localhost:8080/api/produk
+	// POST localhost:8080/api/produk
 	http.HandleFunc("/api/produk", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			getAllProduk(w, r)
@@ -282,9 +282,9 @@ func main() {
 		}
 	})
 
-	// GET localhost:8887/api/categories/{id}
-	// PUT localhost:8887/api/categories/{id}
-	// DELETE localhost:8887/api/categories/{id}
+	// GET localhost:8080/api/categories/{id}
+	// PUT localhost:8080/api/categories/{id}
+	// DELETE localhost:8080/api/categories/{id}
 	http.HandleFunc("/api/categories/", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			getCategoryByID(w, r)
@@ -295,8 +295,8 @@ func main() {
 		}
 	})
 
-	// GET localhost:8887/api/categories
-	// POST localhost:8887/api/categories
+	// GET localhost:8080/api/categories
+	// POST localhost:8080/api/categories
 	http.HandleFunc("/api/categories", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			getAllCategories(w, r)
@@ -305,7 +305,7 @@ func main() {
 		}
 	})
 
-	// localhost:8887/health
+	// localhost:8080/health
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]string{
