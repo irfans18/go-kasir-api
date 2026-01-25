@@ -257,7 +257,7 @@ func createProduk(w http.ResponseWriter, r *http.Request) {
 func main() {
 	// Server Config
 	PORT := "8080"
-	HOST := "localhost"
+	// HOST := "localhost"
 
 	// GET localhost:8080/api/produk/{id}
 	// PUT localhost:8080/api/produk/{id}
@@ -314,9 +314,9 @@ func main() {
 		})
 	})
 
-	fmt.Println("Server running di", fmt.Sprintf("%s:%s", HOST, PORT))
+	fmt.Println("Server running di", fmt.Sprintf("localhost:%s", PORT))
 
-	err := http.ListenAndServe(fmt.Sprintf("%s:%s", HOST, PORT), nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%s", PORT), nil)
 	if err != nil {
 		fmt.Println("Gagal running server")
 	}
