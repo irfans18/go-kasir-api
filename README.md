@@ -48,7 +48,7 @@ Or run directly with Go:
 go run main.go
 ```
 
-The server will start on `localhost:8887`
+The server will start on `localhost:8080`
 
 ## API Endpoints
 
@@ -69,7 +69,7 @@ Check if the API is running.
 
 ### Get All Products
 
-**GET** `/api/produk`
+**GET** `/api/v1/produk`
 
 Retrieve all products.
 
@@ -94,7 +94,7 @@ Retrieve all products.
 
 ### Get Product by ID
 
-**GET** `/api/produk/{id}`
+**GET** `/api/v1/produk/{id}`
 
 Retrieve a specific product by its ID.
 
@@ -117,7 +117,7 @@ Produk belum ada
 
 ### Create Product
 
-**POST** `/api/produk`
+**POST** `/api/v1/produk`
 
 Create a new product.
 
@@ -144,7 +144,7 @@ Create a new product.
 
 ### Update Product
 
-**PUT** `/api/produk/{id}`
+**PUT** `/api/v1/produk/{id}`
 
 Update an existing product.
 
@@ -177,7 +177,7 @@ Produk belum ada
 
 ### Delete Product
 
-**DELETE** `/api/produk/{id}`
+**DELETE** `/api/v1/produk/{id}`
 
 Delete a product by ID.
 
@@ -197,7 +197,7 @@ Produk belum ada
 
 ### Get All Categories
 
-**GET** `/api/categories`
+**GET** `/api/v1/categories`
 
 Retrieve all categories.
 
@@ -220,7 +220,7 @@ Retrieve all categories.
 
 ### Get Category by ID
 
-**GET** `/api/categories/{id}`
+**GET** `/api/v1/categories/{id}`
 
 Retrieve a specific category by its ID.
 
@@ -242,7 +242,7 @@ Category belum ada
 
 ### Create Category
 
-**POST** `/api/categories`
+**POST** `/api/v1/categories`
 
 Create a new category.
 
@@ -267,7 +267,7 @@ Create a new category.
 
 ### Update Category
 
-**PUT** `/api/categories/{id}`
+**PUT** `/api/v1/categories/{id}`
 
 Update an existing category.
 
@@ -298,7 +298,7 @@ Category belum ada
 
 ### Delete Category
 
-**DELETE** `/api/categories/{id}`
+**DELETE** `/api/v1/categories/{id}`
 
 Delete a category by ID.
 
@@ -323,19 +323,19 @@ Category belum ada
 **Get all products:**
 
 ```bash
-curl http://localhost:8887/api/produk
+curl http://localhost:8080/api/v1/produk
 ```
 
 **Get product by ID:**
 
 ```bash
-curl http://localhost:8887/api/produk/1
+curl http://localhost:8080/api/v1/produk/1
 ```
 
 **Create a product:**
 
 ```bash
-curl -X POST http://localhost:8887/api/produk \
+curl -X POST http://localhost:8080/api/v1/produk \
   -H "Content-Type: application/json" \
   -d '{"nama": "Susu UHT", "harga": 5000, "stok": 30}'
 ```
@@ -343,7 +343,7 @@ curl -X POST http://localhost:8887/api/produk \
 **Update a product:**
 
 ```bash
-curl -X PUT http://localhost:8887/api/produk/1 \
+curl -X PUT http://localhost:8080/api/v1/produk/1 \
   -H "Content-Type: application/json" \
   -d '{"nama": "Indomie Goreng", "harga": 4000, "stok": 15}'
 ```
@@ -351,13 +351,13 @@ curl -X PUT http://localhost:8887/api/produk/1 \
 **Delete a product:**
 
 ```bash
-curl -X DELETE http://localhost:8887/api/produk/1
+curl -X DELETE http://localhost:8080/api/v1/produk/1
 ```
 
 **Health check:**
 
 ```bash
-curl http://localhost:8887/health
+curl http://localhost:8080/health
 ```
 
 ### Using cURL for Categories
@@ -365,19 +365,19 @@ curl http://localhost:8887/health
 **Get all categories:**
 
 ```bash
-curl http://localhost:8887/api/categories
+curl http://localhost:8080/api/v1/categories
 ```
 
 **Get category by ID:**
 
 ```bash
-curl http://localhost:8887/api/categories/1
+curl http://localhost:8080/api/v1/categories/1
 ```
 
 **Create a category:**
 
 ```bash
-curl -X POST http://localhost:8887/api/categories \
+curl -X POST http://localhost:8080/api/v1/categories \
   -H "Content-Type: application/json" \
   -d '{"name": "Elektronik", "description": "Barang elektronik rumah tangga"}'
 ```
@@ -385,7 +385,7 @@ curl -X POST http://localhost:8887/api/categories \
 **Update a category:**
 
 ```bash
-curl -X PUT http://localhost:8887/api/categories/1 \
+curl -X PUT http://localhost:8080/api/v1/categories/1 \
   -H "Content-Type: application/json" \
   -d '{"name": "Minuman Dingin", "description": "Minuman dingin segar"}'
 ```
@@ -393,7 +393,7 @@ curl -X PUT http://localhost:8887/api/categories/1 \
 **Delete a category:**
 
 ```bash
-curl -X DELETE http://localhost:8887/api/categories/1
+curl -X DELETE http://localhost:8080/api/v1/categories/1
 ```
 
 ## Project Structure
@@ -450,8 +450,8 @@ The API comes with the following default data:
 The server runs on:
 
 - **Host:** `localhost`
-- **Port:** `8887`
-- **Full URL:** `http://localhost:8887`
+- **Port:** `8080`
+- **Full URL:** `http://localhost:8080`
 
 To change the port, modify the `PORT` variable in `main.go`.
 
