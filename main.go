@@ -79,8 +79,8 @@ func main() {
 		})
 	})
 
-	addr := "0.0.0.0:" + config.Port
-	fmt.Println("Server running di", addr)
+	addr := ":" + config.Port
+	fmt.Println("Listening on", addr)
 
 	err = http.ListenAndServe(addr, nil)
 	if err != nil {
