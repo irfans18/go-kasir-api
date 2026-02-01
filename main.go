@@ -15,12 +15,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-type Category struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
-
 type Config struct {
 	Port   string `mapstructure:"PORT"`
 	DBConn string `mapstructure:"DB_CONN"`
@@ -54,6 +48,10 @@ func main() {
 	productService := service.NewProductService(productRepo)
 	productHandler := handler.NewProductHandler(productService)
 
+	categoryRepo := repository.NewCategoryRepository(db)
+	categoryService := service.NewCategoryService(categoryRepo)
+	categoryHandler := handler.NewCategoryHandler(categoryService)
+
 	// GET localhost:8080/api/v1/products/{id}
 	// PUT localhost:8080/api/v1/products/{id}
 	// DELETE localhost:8080/api/v1/products/{id}
@@ -66,25 +64,11 @@ func main() {
 	// GET localhost:8080/api/v1/categories/{id}
 	// PUT localhost:8080/api/v1/categories/{id}
 	// DELETE localhost:8080/api/v1/categories/{id}
-	// http.HandleFunc("/api/v1/categories/", func(w http.ResponseWriter, r *http.Request) {
-	// 	if r.Method == "GET" {
-	// 		getCategoryByID(w, r)
-	// 	} else if r.Method == "PUT" {
-	// 		updateCategory(w, r)
-	// 	} else if r.Method == "DELETE" {
-	// 		deleteCategory(w, r)
-	// 	}
-	// })
+	http.HandleFunc("/api/v1/categories/", categoryHandler.HandleCategoryByID)
 
-	// // GET localhost:8080/api/v1/categories
-	// // POST localhost:8080/api/v1/categories
-	// http.HandleFunc("/api/v1/categories", func(w http.ResponseWriter, r *http.Request) {
-	// 	if r.Method == "GET" {
-	// 		getAllCategories(w, r)
-	// 	} else if r.Method == "POST" {
-	// 		createCategory(w, r)
-	// 	}
-	// })
+	// GET localhost:8080/api/v1/categories
+	// POST localhost:8080/api/v1/categories
+	http.HandleFunc("/api/v1/categories", categoryHandler.HandleCategorys)
 
 	// localhost:8080/health
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
