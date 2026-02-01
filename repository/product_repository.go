@@ -15,7 +15,11 @@ func NewProductRepository(db *sql.DB) *ProductRepository {
 }
 
 func (repo *ProductRepository) GetAll() ([]model.Product, error) {
-	query := "SELECT id, name, price, stock FROM products"
+	query := `
+	SELECT p.id, p.name, p.price, p.stock, c.name as category, p.category_id
+	FROM products p
+	JOIN categories c ON p.category_id = c.id
+	`
 	rows, err := repo.db.Query(query)
 	if err != nil {
 		return nil, err
@@ -25,7 +29,7 @@ func (repo *ProductRepository) GetAll() ([]model.Product, error) {
 	products := make([]model.Product, 0)
 	for rows.Next() {
 		var p model.Product
-		err := rows.Scan(&p.ID, &p.Name, &p.Price, &p.Stock)
+		err := rows.Scan(&p.ID, &p.Name, &p.Price, &p.Stock, &p.Category, &p.CategoryID)
 		if err != nil {
 			return nil, err
 		}
@@ -43,30 +47,30 @@ func (repo *ProductRepository) Create(product *model.Product) error {
 
 // GetByID - ambil produk by ID
 func (repo *ProductRepository) GetByID(id int) (*model.Product, error) {
-	query := `
-	SELECT 
-		id, 
-		name, 
-		price, 
-		stock, 
-		category_id 
-	FROM products 
-	WHERE id = $1
-	`
 	// query := `
 	// SELECT
 	// 	id,
 	// 	name,
 	// 	price,
 	// 	stock,
-	// 	c.name as category
-	// FROM products p
-	// JOIN categories c ON p.category_id = c.id
-	// WHERE p.id = $1
+	// 	category_id
+	// FROM products
+	// WHERE id = $1
 	// `
+	query := `
+	SELECT
+		id,
+		name,
+		price,
+		stock,
+		c.name as category
+	FROM products p
+	JOIN categories c ON p.category_id = c.id
+	WHERE p.id = $1
+	`
 
 	var p model.Product
-	err := repo.db.QueryRow(query, id).Scan(&p.ID, &p.Name, &p.Price, &p.Stock, &p.CategoryID)
+	err := repo.db.QueryRow(query, id).Scan(&p.ID, &p.Name, &p.Price, &p.Stock, &p.Category)
 	if err == sql.ErrNoRows {
 		return nil, errors.New("produk tidak ditemukan")
 	}

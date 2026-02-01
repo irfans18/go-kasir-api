@@ -17,14 +17,17 @@ func (s *ProductService) GetAll() ([]model.Product, error) {
 	return s.repo.GetAll()
 }
 
+// TODO: Sanitize response
 func (s *ProductService) Create(data *model.Product) error {
 	return s.repo.Create(data)
 }
 
+// TODO: Sanitize response
 func (s *ProductService) GetByID(id int) (*model.Product, error) {
 	return s.repo.GetByID(id)
 }
 
+// TODO: Sanitize response
 func (s *ProductService) Update(product *model.Product) error {
 	return s.repo.Update(product)
 }
